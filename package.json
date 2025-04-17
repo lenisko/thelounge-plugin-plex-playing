@@ -1,0 +1,33 @@
+{
+    "name": "thelounge-plugin-plex-playing",
+    "version": "1.1.0",
+    "description": "Simple plugin for the irc client thelounge that allows you to paste playing status from Plex.",
+    "main": "index.js",
+    "repository": "https://github.com/lenisko/thelounge-plugin-plex-playing.git",
+    "author": "lenisko",
+    "homepage": "https://github.com/lenisko/thelounge-plugin-plex-playing",
+    "license": "MIT",
+    "keywords": [
+        "thelounge",
+        "thelounge-plugin",
+        "plex",
+        "playing",
+        "lenisko"
+    ],
+    "bugs": {
+        "url": "https://github.com/lenisko/thelounge-plugin-plex-playing/issues"
+    },
+    "thelounge": {
+        "name": "Plex",
+        "type": "plugin"
+    },
+    "dependencies": {
+        "axios": "^1.8.0",
+        "thelounge": "^4.4.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.24.0",
+        "eslint": "^9.24.0",
+        "globals": "^16.0.0"
+    }
+}
