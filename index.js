@@ -1,6 +1,5 @@
 "use strict";
 
-const axios = require('axios');
 const fs = require("fs");
 const path = require('path');
 
@@ -21,7 +20,7 @@ function saveConfig() {
         if (err) thelounge.Logger.error(err);
         thelounge.Logger.info("[Plex Playing] Successfully wrote config to file " + configFile);
     });
-}
+};
 
 function loadConfig() {
     fs.readFile(configFile, "utf-8", function (err, data) {
@@ -34,21 +33,30 @@ function loadConfig() {
             saveConfig();
         }
     });
-}
+};
 
 async function getStatus(url, token, username, includeSnapshot) {
     try {
         const cleanedUrl = url.replace(/\/+$/, "");
         const fullUrl = `${cleanedUrl}/state/${username}?fetch_snapshot=${includeSnapshot}`;
-        const response = await axios.get(fullUrl, {
-            headers: { "x-api-key": token }
+        const response = await fetch(fullUrl, {
+            method: "GET",
+            headers: {
+                "x-api-key": token
+            }
         });
-        return { status: response.data || null };
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return { status: data || null };
     } catch (error) {
         thelounge.Logger.error("Error while fetching Plex status:", error.message);
         return { status: null, error: error.message };
     }
-}
+};
 
 const plexConfigCommand = {
     input: function (client, target, command, args) {
